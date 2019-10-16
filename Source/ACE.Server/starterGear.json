@@ -49,6 +49,16 @@
                     "stacksize": "10000"
                 },
                 {
+                    "weenieId": "2626",
+                    "name": "Trade Note (50,000)",
+                    "stacksize": "25",
+                },
+                {
+                    "weenieId": "20630",
+                    "name": "Trade Note (250,000)",
+                    "stacksize": "10",
+                },
+                {
                     "weenieId": "166",
                     "name": "Sack",
                     "stacksize": "1"
