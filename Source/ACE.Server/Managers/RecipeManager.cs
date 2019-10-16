@@ -222,6 +222,10 @@ namespace ACE.Server.Managers
 
                     successChance = Math.Clamp(successChance, 0.0f, 1.0f);
                 }
+                
+                // check if implicit foolproof materials are enabled
+                if (toolWorkmanship >= PropertyManager.GetDouble("implicit_foolproof_workmanship").Item)
+                    successChance = 1.0f;
 
                 // handle rare foolproof material
                 if (tool.WeenieClassId >= 30094 && tool.WeenieClassId <= 30106)
