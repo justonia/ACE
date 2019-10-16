@@ -212,13 +212,15 @@ namespace ACE.Server.Managers
 
                 successChance = SkillCheck.GetSkillChance((int)skill.Current, difficulty);
 
-                // imbue: divide success by 3
+                // imbue: divide success by imbue_chance_divisor (in retail, 1/3rd the chance)
                 if (recipe.SalvageType == 2)
                 {
-                    successChance /= 3.0f;
+                    successChance /= PropertyManager.GetDouble("imbue_chance_divisor").Item;
 
                     if (player.AugmentationBonusImbueChance > 0)
                         successChance += player.AugmentationBonusImbueChance * 0.05f;
+
+                    successChance = Math.Clamp(successChance, 0.0f, 1.0f);
                 }
 
                 // handle rare foolproof material

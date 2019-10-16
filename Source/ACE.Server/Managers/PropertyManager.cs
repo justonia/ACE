@@ -539,7 +539,8 @@ namespace ACE.Server.Managers
                 ("vendor_unique_rot_time", new Property<double>(300, "the number of seconds before unique items sold to vendors disappear")),
                 ("vitae_penalty", new Property<double>(0.05, "the amount of vitae penalty a player gets per death")),
                 ("vitae_penalty_max", new Property<double>(0.40, "the maximum vitae penalty a player can have")),
-                ("xp_modifier", new Property<double>(1.0, "scales the amount of xp received by players"))
+                ("xp_modifier", new Property<double>(1.0, "scales the amount of xp received by players")),
+                ("imbue_chance_divisor", new Property<double>(3.0, "in retail, imbues have 1/3 the chance of succcess as a regular tinker."))
                 );
 
         public static readonly ReadOnlyDictionary<string, Property<String>> DefaultStringProperties =
