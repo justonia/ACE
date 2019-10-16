@@ -169,7 +169,7 @@ namespace ACE.Server.WorldObjects
             // determine the amount of salvage produced (structure)
             SalvageMessage message = null;
             var amountProduced = GetStructure(item, salvageResults, ref message);
-
+            
             var remaining = amountProduced;
 
             while (remaining > 0)
@@ -297,6 +297,10 @@ namespace ACE.Server.WorldObjects
 
             // choose the best one
             var addStructure = Math.Max(salvageAmount, tinkeringAmount);
+
+            // modify the amount of yield
+            var yieldBonus = Math.Max(0, (int)Math.Round((double)addStructure * (1.0 - PropertyManager.GetDouble("salvage_yield_modifier").Item)));
+            addStructure += yieldBonus;
 
             var skill = salvageAmount > tinkeringAmount ? Skill.Salvaging : GetMaxSkill(TinkeringSkills).Skill;
 
