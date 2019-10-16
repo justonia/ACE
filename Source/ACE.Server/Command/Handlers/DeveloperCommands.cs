@@ -1140,6 +1140,23 @@ namespace ACE.Server.Command.Handlers
             }
         }
 
+        // addspells
+        [CommandHandler("addspells", AccessLevel.Developer, CommandHandlerFlag.RequiresWorld, 0, "Adds all spells of a specified level to your own spellbook.")]
+        public static void HandleAddSpells(Session session, params string[] parameters)
+        {
+            if (parameters?.Length == 0 || !uint.TryParse(parameters[0], out var spellLevel) || spellLevel > 8)
+            {
+                ChatPacket.SendServerMessage(session, "Usage: /addspells 4 (max 8) ", ChatMessageType.Broadcast);
+                return;
+            }
+
+            session.Player.LearnSpellsInBulk(MagicSchool.CreatureEnchantment, spellLevel);
+            session.Player.LearnSpellsInBulk(MagicSchool.ItemEnchantment, spellLevel);
+            session.Player.LearnSpellsInBulk(MagicSchool.LifeMagic, spellLevel);
+            session.Player.LearnSpellsInBulk(MagicSchool.VoidMagic, spellLevel);
+            session.Player.LearnSpellsInBulk(MagicSchool.WarMagic, spellLevel);
+        }
+
         /// <summary>
         /// Debug console command to test the GetSpellFormula function.
         /// </summary>
