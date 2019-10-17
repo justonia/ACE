@@ -192,6 +192,9 @@ namespace ACE.Server.WorldObjects.Managers
                 if (caster is Player player && player.AugmentationIncreasedSpellDuration > 0 && spell.DotDuration == 0)
                     duration *= 1.0f + player.AugmentationIncreasedSpellDuration * 0.2f;
 
+                if (caster is Player && spell.IsBeneficial)
+                    duration *= PropertyManager.GetDouble("beneficial_spell_duration_modifier").Item;
+
                 var timeRemaining = refreshSpell.Duration + refreshSpell.StartTime;
 
                 if (duration > timeRemaining)
@@ -232,6 +235,9 @@ namespace ACE.Server.WorldObjects.Managers
 
                 if (caster is Player player && player.AugmentationIncreasedSpellDuration > 0 && spell.DotDuration == 0)
                     entry.Duration *= 1.0f + player.AugmentationIncreasedSpellDuration * 0.2f;
+
+                if (caster is Player && spell.IsBeneficial)
+                    entry.Duration *= PropertyManager.GetDouble("beneficial_spell_duration_modifier").Item;
             }
             else
             {
