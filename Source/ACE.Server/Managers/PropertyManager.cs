@@ -540,10 +540,14 @@ namespace ACE.Server.Managers
                 ("vitae_penalty", new Property<double>(0.05, "the amount of vitae penalty a player gets per death")),
                 ("vitae_penalty_max", new Property<double>(0.40, "the maximum vitae penalty a player can have")),
                 ("xp_modifier", new Property<double>(1.0, "scales the amount of xp received by players")),
+                ("xp_modifier_level_proportional", new Property<double>(1.0, "scales the amount of xp received by players from level proportional rewards")),
                 ("beneficial_spell_duration_modifier", new Property<double>(1.0, "scales the duration of all beneficial spells for players")),
                 ("imbue_chance_divisor", new Property<double>(3.0, "in retail, imbues have 1/3 the chance of succcess as a regular tinker.")),
                 ("implicit_foolproof_workmanship", new Property<double>(11.0, "if workmanship of the crafting material meets or exceeds this value, it is treated as if it were a foolproof material. Any value greater than 10 prevents conversion.")),
-                ("salvage_yield_modifier", new Property<double>(1.0, "scales the amount of salvage produced by an item"))
+                ("salvage_yield_modifier", new Property<double>(1.0, "scales the amount of salvage produced by an item")),
+                ("salvage_steel_yield_modifier", new Property<double>(1.0, "scales the amount of salvage produced by a steel item")),
+                ("loot_item_quantity_multiplier", new Property<double>(1.0, "multiplies the base number of items a corpse can drop")),
+                ("loot_magic_item_quantity_multiplier", new Property<double>(1.0, "multiplies the base number of magic items a corpse can drop"))
                 );
 
         public static readonly ReadOnlyDictionary<string, Property<String>> DefaultStringProperties =

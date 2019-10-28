@@ -380,7 +380,7 @@ namespace ACE.Server.Entity
             {
                 // TODO: get randomly generated death treasure from LootGenerationFactory
                 //log.Debug($"{_generator.Name}.TreasureGenerator(): found death treasure {Biota.WeenieClassId}");
-                return LootGenerationFactory.CreateRandomLootObjects(deathTreasure);
+                return LootGenerationFactory.CreateRandomLootObjects(deathTreasure, false);
             }
             else
             {

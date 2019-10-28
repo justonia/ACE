@@ -276,7 +276,7 @@ namespace ACE.Server.Managers
 
         public static void DoTinkering(Player player, WorldObject tool, WorldObject target, Recipe recipe, float chance, bool incItemTinkered)
         {
-            var success = ThreadSafeRandom.Next(0.0f, 1.0f) <= chance;
+            var success = chance >= 0.99f || ThreadSafeRandom.Next(0.0f, 1.0f) <= chance;
             var salvageMaterial = GetMaterialName(tool.MaterialType ?? 0);
 
             if (success)

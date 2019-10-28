@@ -2664,5 +2664,24 @@ namespace ACE.Server.Command.Handlers
             if (player != session.Player)
                 session.Network.EnqueueSend(new GameMessageSystemChat("Removed vitae for {player.Name}", ChatMessageType.Broadcast));
         }
+
+        [CommandHandler("traintradeskills", AccessLevel.Developer, CommandHandlerFlag.None, 0, "Trains all trade skills for 0 skill credits")]
+        public static void HandleTrainTradeSkills(Session session, params string[] parameters)
+        {
+            var player = CommandHandlerHelper.GetLastAppraisedObject(session) as Player;
+
+            if (player == null)
+                player = session.Player;
+
+            var skills = new Skill[]{ Skill.WeaponTinkering, Skill.ArmorTinkering, Skill.MagicItemTinkering, Skill.ItemTinkering, Skill.Cooking, Skill.Alchemy, Skill.Lockpick };
+            foreach (var skill in skills)
+            {
+                if (player.TrainSkill(skill, 0))
+                {
+                    var playerSkill = player.Skills[Skill.WeaponTinkering];
+                    player.Session.Network.EnqueueSend(new GameMessagePrivateUpdateSkill(player, skill, playerSkill.AdvancementClass, playerSkill.Ranks, playerSkill.InitLevel, playerSkill.ExperienceSpent));
+                }
+            }
+        }
     }
 }

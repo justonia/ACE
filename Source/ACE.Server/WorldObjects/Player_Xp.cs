@@ -361,9 +361,12 @@ namespace ACE.Server.WorldObjects
             var nextLevelXP = GetXPBetweenLevels(Level.Value, Level.Value + 1);
             var scaledXP = (long)Math.Min(nextLevelXP * percent, max);
 
+            var modifier = PropertyManager.GetDouble("xp_modifier_level_proportional").Item;
+            var amount = (long)Math.Round(scaledXP * modifier);
+
             var shareType = shareable ? ShareType.All : ShareType.None;
 
-            GrantXP(scaledXP, XpType.Quest, shareType);
+            GrantXP(amount, XpType.Quest, shareType);
         }
 
         /// <summary>

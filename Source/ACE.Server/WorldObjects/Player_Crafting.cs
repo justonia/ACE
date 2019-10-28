@@ -299,7 +299,13 @@ namespace ACE.Server.WorldObjects
             var addStructure = Math.Max(salvageAmount, tinkeringAmount);
 
             // modify the amount of yield
-            var yieldBonus = Math.Max(0, (int)Math.Round((double)addStructure * (1.0 - PropertyManager.GetDouble("salvage_yield_modifier").Item)));
+            int yieldBonus = 0;
+            
+            if ((salvageItem.MaterialType ?? ACE.Entity.Enum.MaterialType.Unknown) == ACE.Entity.Enum.MaterialType.Steel)
+                yieldBonus = Math.Max(0, (int)Math.Round((double)addStructure * (PropertyManager.GetDouble("salvage_steel_yield_modifier").Item - 1.0)));
+            else
+                yieldBonus = Math.Max(0, (int)Math.Round((double)addStructure * (PropertyManager.GetDouble("salvage_yield_modifier").Item - 1.0)));
+
             addStructure += yieldBonus;
 
             var skill = salvageAmount > tinkeringAmount ? Skill.Salvaging : GetMaxSkill(TinkeringSkills).Skill;

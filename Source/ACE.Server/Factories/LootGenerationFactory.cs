@@ -51,7 +51,7 @@ namespace ACE.Server.Factories
             MixedEquipment = 31,
         }
 
-        public static List<WorldObject> CreateRandomLootObjects(TreasureDeath profile)
+        public static List<WorldObject> CreateRandomLootObjects(TreasureDeath profile, bool useMultipliers)
         {
             int numItems;
             WorldObject lootWorldObject;
@@ -81,6 +81,10 @@ namespace ACE.Server.Factories
             if (itemChance <= profile.ItemChance)
             {
                 numItems = ThreadSafeRandom.Next(profile.ItemMinAmount, profile.ItemMaxAmount);
+
+                if (useMultipliers)
+                    numItems = (int)Math.Round((double)numItems * PropertyManager.GetDouble("loot_item_quantity_multiplier").Item);
+
                 for (var i = 0; i < numItems; i++)
                 {
                     if (lootBias == LootBias.MagicEquipment)
@@ -95,6 +99,9 @@ namespace ACE.Server.Factories
             if (itemChance <= profile.MagicItemChance)
             {
                 numItems = ThreadSafeRandom.Next(profile.MagicItemMinAmount, profile.MagicItemMaxAmount);
+
+                if (useMultipliers)
+                    numItems = (int)Math.Round((double)numItems * PropertyManager.GetDouble("loot_magic_item_quantity_multiplier").Item);
 
                 bool aetheriaGenerated = false;
                 bool generateAetheria = false;

@@ -401,6 +401,9 @@ namespace ACE.Server.WorldObjects
             if (slumlord.HouseOwner != null)
                 return false;
 
+            if (!PropertyManager.GetBool("house_purchase_requirements").Item)
+                return true;
+
             Console.WriteLine($"{slumlord.Name} ({slumlord.Guid})");
             var buyItems = slumlord.GetBuyItems();
             Console.WriteLine("Required items:");
