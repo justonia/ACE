@@ -454,7 +454,7 @@ namespace ACE.Server.Command.Handlers
         /// Teleports an admin to their sanctuary position. If a single uint value from 1 to 9 is provided as a parameter then the admin is teleported to the cooresponding named recall point.
         /// </summary>
         /// <param name="parameters">A single uint value from 0 to 9. Value 0 recalls to Sanctuary, values 1 through 9 teleports too the corresponding saved recall point.</param>
-        [CommandHandler("home", AccessLevel.Sentinel, CommandHandlerFlag.RequiresWorld, 0,
+        [CommandHandler("home", AccessLevel.Player, CommandHandlerFlag.RequiresWorld, 0,
             "Teleports you to your sanctuary position.",
             "< recall number > - Recalls to a saved position, valid values are 1 - 9.\n" +
             "NOTE: Calling @home without a number recalls your sanctuary position; calling it with a number will teleport you to the corresponding saved position.")]
@@ -716,7 +716,7 @@ namespace ACE.Server.Command.Handlers
         /// Command for saving the Admin's current location as the sanctuary position. If a uint between 1-9 is provided as a parameter, the corresponding named recall is saved.
         /// </summary>
         /// <param name="parameters">A single uint value from 0 to 9. Value 0 saves the Sanctuary recall (default), values 1 through 9 save the corresponding named recall point.</param>
-        [CommandHandler("save", AccessLevel.Sentinel, CommandHandlerFlag.RequiresWorld, 0,
+        [CommandHandler("save", AccessLevel.Player, CommandHandlerFlag.RequiresWorld, 0,
             "Sets your sanctuary position or a named recall point.",
             "< recall number > - Saves your position into the numbered recall, valid values are 1 - 9.\n" +
             "NOTE: Calling @save without a number saves your sanctuary (Lifestone Recall) position.")]
